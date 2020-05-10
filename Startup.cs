@@ -23,6 +23,7 @@ namespace HotelManagement
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseNodeModules();
         }
     }
 }
