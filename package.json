@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "jquery": "3.5.1",
-    "bootstrap": "4.4.1"
+    "bootstrap": "4.4.1",
+    "jquery-validation": "1.19.1",
+    "jquery-validation-unobtrusive": "3.2.11"
   },
   "devDependencies": {}
 }
