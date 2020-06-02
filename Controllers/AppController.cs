@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,43 @@ namespace HotelManagement.Controllers
     public class AppController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("MainPage")]
+        public IActionResult MainPage()
+        {
+            return View();
+        }
+
+        [HttpGet("RoomManagement")]
+        public IActionResult RoomManagement()
+        {
+            return View();
+        }
+        [HttpPost("RoomManagement")]
+        public IActionResult RoomManagement(RoomManagementViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                //do smth
+            }
+           else
+            {
+                //smth else
+            }
+            return View();
+        }
+
+        [HttpGet("ReservationManagement")]
+        public IActionResult ReservationManagement()
+        {
+            return View();
+        }
+
+        [HttpGet("Calendar")]
+        public IActionResult Calendar()
         {
             return View();
         }

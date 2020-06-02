@@ -1,0 +1,30 @@
+﻿@*@{
+    ViewBag.Title = "Home Page";
+
+}*@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>Welcome to Hotel Management</header>
+    <menu>
+        <ul>
+            <li><a asp-controller="App" asp-action="Index">Login</a></li>
+            <li><a asp-controller="App" asp-action="MainPage">Main Page</a></li>
+            <li><a asp-controller="App" asp-action="RoomManagement">Room Management</a></li>
+            <li><a asp-controller="App" asp-action="ReservationManagement">Reservation Management</a></li>
+            <li><a asp-controller="App" asp-action="Calendar">Calendar</a></li>
+        </ul>
+    </menu>
+    <section>
+        <h2>@ViewBag.Title</h2>
+        @RenderBody()
+    </section>
+    <br/>
+    <footer>Copyright 2020 Denisa Inc</footer>
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/index.js"></script>
+</body>
+</html>

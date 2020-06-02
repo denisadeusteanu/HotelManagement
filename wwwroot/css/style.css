@@ -1,1 +1,14 @@
-﻿ 
+﻿ menu li{
+display:inline;
+ }
+
+ label{
+     font:50px;
+ }
+ menu li::after{
+     content: ' |'
+ }
+
+ menu li:last-of-type::after{
+     content:"";
+ }

@@ -1,0 +1,26 @@
+﻿@model RoomManagementViewModel
+<h2>Room Management</h2>
+<br />
+<button>Add Room</button>
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <label asp-for="PersonCapacity">Person Capacity:</label>
+    <br />
+    <input type="number" asp-for="PersonCapacity"/>
+    <br />
+    <label asp-for="RoomNumber">Room Number:</label>
+    <br />
+    <input type="number" asp-for="RoomNumber"/>
+    <br />
+    <label asp-for="RoomDescription">Description:</label>
+    <br />
+    <textarea rows="4" asp-for="RoomDescription"></textarea>
+    <br />
+    <input type="submit" value="Add" />
+    <br />
+</form>
+<div>
+            <p>Rooms(Please select room)</p>
+</div>
+<button>Edit</button>
+<button>Delete</button>
