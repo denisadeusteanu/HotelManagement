@@ -5,26 +5,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <header>Welcome to Hotel Management</header>
-    <menu>
-        <ul>
-            <li><a asp-controller="App" asp-action="Index">Login</a></li>
-            <li><a asp-controller="App" asp-action="MainPage">Main Page</a></li>
-            <li><a asp-controller="App" asp-action="RoomManagement">Room Management</a></li>
-            <li><a asp-controller="App" asp-action="ReservationManagement">Reservation Management</a></li>
-            <li><a asp-controller="App" asp-action="Calendar">Calendar</a></li>
-        </ul>
-    </menu>
-    <section>
-        <h2>@ViewBag.Title</h2>
+    <header class="container">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <h1 class="navbar-brand">Welcome to Hotel Management</h1>
+            <div>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Index">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="MainPage">Main Page</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="RoomManagement">Room Management</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="ReservationManagement">Reservation Management</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Calendar">Calendar</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="container">
+        <h2 class="text-center">@ViewBag.Title</h2>
         @RenderBody()
+        <br />
     </section>
-    <br/>
-    <footer>Copyright 2020 Denisa Inc</footer>
+    <footer class="container">
+        <div class="text-center">Copyright 2020 Denisa Inc</div>
+    </footer>
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/index.js"></script>
 </body>
 </html>

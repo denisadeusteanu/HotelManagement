@@ -3,7 +3,7 @@
     ViewBag.Title = "Login Page";
 
 }
-<link href="~/css/style.css" rel="stylesheet" />
+@*<link href="~/css/style.css" rel="stylesheet" />*@
 @*<div id="theForm">
         <form>
             <label>Your Name:</label>
@@ -27,24 +27,25 @@
         </form>
     </div>*@
 
-<div>
-    <div id="loginToggle">Login</div>
-    <form class="popup-form">
-        <div>
-            <label asp-for="Username">Username</label>
-            <input asp-for="Username"/>
-        </div>
-        <div>
-            <label asp-for="Password">Password</label>
-            <input type="password" asp-for="Password"/>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>Remember Me?</label>
-        </div>
-        <div>
-            <input type="submit" value="Login" />
-        </div>
-    </form>
+<div class="col-md-6 offset-md-3">
+    <div class="card card-body bg-light">
+        <form class="popup-form">
+            <div>
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" />
+            </div>
+            <div>
+                <label asp-for="Password">Password</label>
+                <input type="password" asp-for="Password" />
+            </div>
+            <div>
+                <input type="checkbox" />
+                <label>Remember Me?</label>
+            </div>
+            <div>
+                <input type="submit" value="Login" />
+            </div>
+        </form>
+    </div>
 </div>
 
