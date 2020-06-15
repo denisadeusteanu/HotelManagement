@@ -1,0 +1,8 @@
+{
+	"Colors": {
+		"Favourite": "blue"
+	},
+	"ConnectionStrings": {
+		"HotelConnectionString" : "server=(localdb)\\ProjectsV13;Database=HotelDb;Integrated Security=true;MultipleActiveResultSets=true"
+	}
+}
