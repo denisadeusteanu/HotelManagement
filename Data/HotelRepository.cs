@@ -16,6 +16,13 @@ namespace HotelManagement.Data
             _context = context;
         }
 
+        public IEnumerable<Reservation> GetAllReservations()
+        {
+            return _context.Reservations
+               .OrderBy(r => r.CheckinDate)
+               .ToList();
+        }
+
         public IEnumerable<Room> GetAllRooms()
         {
             return _context.Rooms

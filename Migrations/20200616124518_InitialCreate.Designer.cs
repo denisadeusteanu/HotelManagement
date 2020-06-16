@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagement.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    [Migration("20200615125153_InitialCreate")]
+    [Migration("20200616124518_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,10 @@ namespace HotelManagement.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -99,14 +102,14 @@ namespace HotelManagement.Migrations
                     b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RoomsId")
+                    b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
 
-                    b.HasIndex("RoomsId");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("ReservationEntity");
                 });
@@ -124,11 +127,11 @@ namespace HotelManagement.Migrations
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsOccupied")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsOccupied")
+                        .HasColumnType("int");
 
-                    b.Property<bool>("IsUsable")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsUsable")
+                        .HasColumnType("int");
 
                     b.Property<int>("PersonCapacity")
                         .HasColumnType("int");
@@ -156,9 +159,9 @@ namespace HotelManagement.Migrations
                         .WithMany("ReservationEntities")
                         .HasForeignKey("ReservationId");
 
-                    b.HasOne("HotelManagement.Data.Entities.Room", "Rooms")
+                    b.HasOne("HotelManagement.Data.Entities.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomsId");
+                        .HasForeignKey("RoomId");
                 });
 
             modelBuilder.Entity("HotelManagement.Data.Entities.Room", b =>

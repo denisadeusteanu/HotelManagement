@@ -11,7 +11,7 @@ namespace HotelManagement.Data.Entities
     {
        
         public int Id { get; set; }
-        public Room Rooms { get; set; }
+        public Room Room { get; set; }
         public Reservation Reservation { get; set; }
     }
 }

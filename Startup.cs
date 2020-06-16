@@ -33,9 +33,9 @@ namespace HotelManagement
 
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddTransient<HotelSeeder>();
-            //services.AddMvc()
-            //    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-             services.AddControllersWithViews();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+          //  services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

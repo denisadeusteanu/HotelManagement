@@ -7,6 +7,10 @@ namespace HotelManagement.Data
     {
         IEnumerable<Room> GetAllRooms();
         IEnumerable<Room> GetAllRoomsByPersonCapacity();
+
+        IEnumerable<Reservation> GetAllReservations();
+
         bool SaveAll();
+        
     }
 }

@@ -13,7 +13,8 @@ namespace HotelManagement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true)
                 },
@@ -68,8 +69,8 @@ namespace HotelManagement.Migrations
                     HotelId = table.Column<int>(nullable: false),
                     PersonCapacity = table.Column<int>(nullable: false),
                     RoomNumber = table.Column<int>(nullable: false),
-                    IsOccupied = table.Column<bool>(nullable: false),
-                    IsUsable = table.Column<bool>(nullable: false),
+                    IsOccupied = table.Column<int>(nullable: false),
+                    IsUsable = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -89,7 +90,7 @@ namespace HotelManagement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomsId = table.Column<int>(nullable: true),
+                    RoomId = table.Column<int>(nullable: true),
                     ReservationId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -102,8 +103,8 @@ namespace HotelManagement.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ReservationEntity_Rooms_RoomsId",
-                        column: x => x.RoomsId,
+                        name: "FK_ReservationEntity_Rooms_RoomId",
+                        column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -115,9 +116,9 @@ namespace HotelManagement.Migrations
                 column: "ReservationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReservationEntity_RoomsId",
+                name: "IX_ReservationEntity_RoomId",
                 table: "ReservationEntity",
-                column: "RoomsId");
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_GuestId",
