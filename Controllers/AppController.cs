@@ -1,4 +1,5 @@
-﻿using HotelManagement.ViewModels;
+﻿using HotelManagement.Data;
+using HotelManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +12,12 @@ namespace HotelManagement.Controllers
 {
     public class AppController : Controller
     {
+        private readonly IHotelRepository _repository;
+
+        public AppController(IHotelRepository repository)
+        {
+            _repository = repository;
+        }
         public IActionResult Index()
         {
             return View();
@@ -25,7 +32,8 @@ namespace HotelManagement.Controllers
         [HttpGet("RoomManagement")]
         public IActionResult RoomManagement()
         {
-            return View();
+            var results = _repository.GetAllRooms();
+            return View(results);
         }
         [HttpPost("RoomManagement")]
         public IActionResult RoomManagement(RoomManagementViewModel model)

@@ -1,0 +1,14 @@
+[
+  {
+    "FirstName": "Andrei",
+    "LastName": "Ionescu",
+    "PhoneNumber": "0734171202",
+    "Email": "andrei.ionescu@test.com"
+  },
+  {
+    "FirstName": "Maria",
+    "LastName": "Popescu",
+    "PhoneNumber": "0721161101",
+    "Email": "maria.popescu@test.com"
+  }
+]

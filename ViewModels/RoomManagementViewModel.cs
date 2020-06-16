@@ -9,12 +9,18 @@ namespace HotelManagement.ViewModels
 {
     public class RoomManagementViewModel
     {
-        [Required]
+        public int Id { get; set; }
+        public int HotelId { get; set; }
+       // [Required]
         public int PersonCapacity { get; set; }
-        [Required]
+       // [Required]
         public int RoomNumber { get; set; }
-        [Required]
-        [MaxLength(250, ErrorMessage ="Too long.")]
-        public string RoomDescription { get; set; }
+        public bool IsOccupied { get; set; }
+        public bool IsUsable { get; set; }
+        [MaxLength(250, ErrorMessage = "Too long.")]
+        public string Description { get; set; }
+        //[Required]
+        //[MaxLength(250, ErrorMessage ="Too long.")]
+        //public string RoomDescription { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+ [
+		{
+			"HotelId": 1,
+			"PersonCapacity": 2,
+			"RoomNumber": 100,
+			"IsOccupied": 0,
+			"IsUsable": 1,
+			"Description": "Camera cu pat matrimonial."
+		},
+		{
+			"HotelId": 1,
+			"PersonCapacity": 2,
+			"RoomNumber": 101,
+			"IsOccupied": 0,
+			"IsUsable": 1,
+			"Description": "Camera cu pat matrimonial."
+		},
+		{
+			"HotelId": 1,
+			"PersonCapacity": 2,
+			"RoomNumber": 102,
+			"IsOccupied": 0,
+			"IsUsable": 1,
+			"Description": "Camera cu 2 paturi single."
+		},
+		{
+			"HotelId": 1,
+			"PersonCapacity": 3,
+			"RoomNumber": 200,
+			"IsOccupied": 0,
+			"IsUsable": 1,
+			"Description": "Camera cu 3 paturi single."
+		},
+		{
+			"HotelId": 1,
+			"PersonCapacity": 3,
+			"RoomNumber": 201,
+			"IsOccupied": 0,
+			"IsUsable": 1,
+			"Description": "Camera cu 1 pat dublu si 1 single."
+		},
+		{
+			"HotelId": 1,
+			"PersonCapacity": 4,
+			"RoomNumber": 300,
+			"IsOccupied": 0,
+			"IsUsable": 1,
+			"Description": "Camera cu 1 pat dublu si 2 single, family."
+		}
+	]
