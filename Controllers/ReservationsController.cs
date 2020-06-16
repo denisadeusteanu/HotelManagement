@@ -1,5 +1,8 @@
-﻿using HotelManagement.Data;
+﻿using AutoMapper;
+using HotelManagement.Data;
 using HotelManagement.Data.Entities;
+using HotelManagement.Enums;
+using HotelManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,10 +18,12 @@ namespace HotelManagement.Controllers
     public class ReservationsController :Controller
     {
         private readonly IHotelRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ReservationsController(IHotelRepository repository)
+        public ReservationsController(IHotelRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -27,13 +32,46 @@ namespace HotelManagement.Controllers
         public IActionResult Get()
         {
             try { 
-            return Ok(_repository.GetAllReservations());
+            return Ok(_mapper.Map<IEnumerable<Reservation>, IEnumerable<ReservationManagementViewModel>>(_repository.GetAllReservations()));
             }
             catch(Exception)
             {
                 return BadRequest("Nu s-au putut gasi rezervarile!");
             }
 
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]ReservationManagementViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var newReservation = _mapper.Map<ReservationManagementViewModel, Reservation>(model);
+
+                    if (newReservation.CheckinDate < DateTime.Now.AddDays(-1) || newReservation.CheckOutDate < DateTime.Now)
+                    {
+                        return BadRequest("Datele nu pot fi din trecut!");
+                    }
+
+                    _repository.AddEntity(model);
+
+                    if (_repository.SaveAll())
+                    {
+                        return Created($"api/reservations/{newReservation.Id}", _mapper.Map<Reservation, ReservationManagementViewModel>(newReservation));
+                    }
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch(Exception)
+            {
+                return BadRequest("Rezervarea nu a putut fi salvata.");
+            }
+            return BadRequest("Rezervarea nu a putut fi salvata.");
         }
     }
 }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using HotelManagement.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace HotelManagement
 {
@@ -33,9 +36,10 @@ namespace HotelManagement
 
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddTransient<HotelSeeder>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-          //  services.AddControllersWithViews();
+            .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore); ;
+            //  services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

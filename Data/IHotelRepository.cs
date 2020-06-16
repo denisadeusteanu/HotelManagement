@@ -11,6 +11,6 @@ namespace HotelManagement.Data
         IEnumerable<Reservation> GetAllReservations();
 
         bool SaveAll();
-        
+        void AddEntity(object model);
     }
 }
