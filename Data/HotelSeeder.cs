@@ -26,7 +26,7 @@ namespace HotelManagement.Data
         {
             _context.Database.EnsureCreated();
 
-            if (!_context.Rooms.Any() & !_context.Hotels.Any())
+            if (!_context.Rooms.Any() && !_context.Hotels.Any())
             {
 
                 //sample data
