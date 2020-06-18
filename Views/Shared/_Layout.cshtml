@@ -19,6 +19,18 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="RoomManagement">Room Management</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="ReservationManagement">Reservation Management</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Calendar">Calendar</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="navbar-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="navbar-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </nav>
@@ -34,5 +46,6 @@
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/index.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,19 @@ namespace HotelManagement.Data
             _context = context;
         }
 
+        public void AddEntity(object model)
+        {
+            _context.Add(model);
+        }
+
         public IEnumerable<Reservation> GetAllReservations()
         {
             return _context.Reservations
-               .OrderBy(r => r.CheckinDate)
-               .ToList();
+                .Include(r => r.Guest)
+                .Include(r => r.ReservationEntities)
+                .ThenInclude(re=>re.Room)
+                .OrderBy(r => r.CheckinDate)
+                .ToList();
         }
 
         public IEnumerable<Room> GetAllRooms()
@@ -35,6 +44,13 @@ namespace HotelManagement.Data
             return _context.Rooms
                 .OrderBy(r => r.PersonCapacity)
                 .ToList();
+        }
+
+        public Room GetRoomById(int id)
+        {
+            return _context.Rooms
+                .Where(r => r.Id == id)
+                .FirstOrDefault();
         }
 
         public bool SaveAll()

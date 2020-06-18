@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Data.Entities;
 using HotelManagement.Enums;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,36 @@ namespace HotelManagement.Data
     {
         private readonly HotelContext _context;
         private readonly IHostingEnvironment _hosting;
+        private readonly UserManager<User> _userManager;
 
-        public HotelSeeder(HotelContext context, IHostingEnvironment hosting)
+        public HotelSeeder(HotelContext context, IHostingEnvironment hosting, UserManager<User> userManager)
         {
             _context = context;
             _hosting = hosting;
+            _userManager = userManager;
         }
 
-        public void Seed()
+        public async Task SeedAsync()
         {
             _context.Database.EnsureCreated();
 
-            if (!_context.Rooms.Any() & !_context.Hotels.Any())
+            User user = await _userManager.FindByEmailAsync("denisa@hotel.com");
+            if (user == null)
+            {
+                user = new User()
+                {
+                    FirstName = "Denisa",
+                    LastName = "Deusteanu",
+                    Email = "denisa@hotel.com",
+                    UserName = "denisa@hotel.com"
+                };
+                var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create new user in seeder.");
+                }
+            }
+            if (!_context.Rooms.Any() && !_context.Hotels.Any())
             {
 
                 //sample data
@@ -46,28 +65,29 @@ namespace HotelManagement.Data
                        Rooms = (ICollection<Room>)rooms,
                        NrOfRooms = 6
                    });
-
-                _context.Reservations.Add(
-                   new Reservation()
-                   {
-                       CheckinDate = DateTime.UtcNow.AddDays(-4),
-                       CheckOutDate = DateTime.UtcNow.AddDays(-1),
-                       ReservationState = ReservationState.Reserved,
-                       Guest = guests.FirstOrDefault(),
-                       NrOfNights = 3
-                   });
-
-                _context.SaveChanges();
-
-                _context.Reservations.FirstOrDefault().ReservationEntities = new List<ReservationEntity>
-                {
-                         new ReservationEntity()
-                         {
-                             Room=rooms.FirstOrDefault(),
-                         }
-                };
-
                 _context.Rooms.AddRange(rooms);
+
+                if (!_context.Reservations.Any())
+                {
+                    var reservation = new Reservation()
+                    {
+                        CheckinDate = DateTime.UtcNow.AddDays(-4),
+                        CheckOutDate = DateTime.UtcNow.AddDays(-1),
+                        ReservationState = ReservationState.Reserved,
+                        Guest = guests.FirstOrDefault(),
+                        NrOfNights = 3
+                    };
+
+                    reservation.ReservationEntities = new List<ReservationEntity>()
+                    {
+                        new ReservationEntity()
+                        {
+                            Room = rooms.First(),
+                        }
+                    };
+
+                    _context.Reservations.Add(reservation);
+                }
 
                 _context.SaveChanges();
             }

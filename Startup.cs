@@ -1,16 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using HotelManagement.Data;
+using HotelManagement.Data.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace HotelManagement
 {
@@ -26,6 +33,24 @@ namespace HotelManagement
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>(cfg=>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<HotelContext>();
+
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = _config["Tokens:Issuer"],
+                        ValidAudience = _config["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                    };
+                });
+
             services.AddDbContext<HotelContext>(cfg=>
             {
                 cfg.UseSqlServer(_config.GetConnectionString("HotelConnectionString"));
@@ -33,9 +58,10 @@ namespace HotelManagement
 
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddTransient<HotelSeeder>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-          //  services.AddControllersWithViews();
+            .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore); ;
+            //  services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +78,11 @@ namespace HotelManagement
             app.UseStaticFiles();
             app.UseNodeModules();
 
+            app.UseAuthentication();            
+
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(cfg=>
             {

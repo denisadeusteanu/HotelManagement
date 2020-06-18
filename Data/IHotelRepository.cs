@@ -7,10 +7,12 @@ namespace HotelManagement.Data
     {
         IEnumerable<Room> GetAllRooms();
         IEnumerable<Room> GetAllRoomsByPersonCapacity();
+        Room GetRoomById(int id);
 
         IEnumerable<Reservation> GetAllReservations();
 
         bool SaveAll();
-        
+        void AddEntity(object model);
+       
     }
 }

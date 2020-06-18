@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.Data.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace HotelManagement.ViewModels
     {
         public int Id { get; set; }
         public int HotelId { get; set; }
-       // [Required]
+        [Required]
         public int PersonCapacity { get; set; }
-       // [Required]
+        [Required]
         public int RoomNumber { get; set; }
-        public bool IsOccupied { get; set; }
-        public bool IsUsable { get; set; }
-        [MaxLength(250, ErrorMessage = "Too long.")]
+        public DaNu IsOccupied { get; set; }
+        public DaNu IsUsable { get; set; }
+        [MaxLength(250, ErrorMessage = "Descrierea este prea lunga.")]
         public string Description { get; set; }
         //[Required]
         //[MaxLength(250, ErrorMessage ="Too long.")]
