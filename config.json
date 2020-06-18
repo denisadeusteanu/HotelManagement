@@ -3,6 +3,11 @@
 		"Favourite": "blue"
 	},
 	"ConnectionStrings": {
-		"HotelConnectionString" : "server=(localdb)\\ProjectsV13;Database=HotelDb;Integrated Security=true;MultipleActiveResultSets=true"
+		"HotelConnectionString": "server=(localdb)\\ProjectsV13;Database=HotelDb;Integrated Security=true;MultipleActiveResultSets=true"
+	},
+	"Tokens": {
+		"Key": "ifwhfuie;dfwf;fw",
+		"Issuer": "localhost",
+		"Audience": "me"
 	}
 }

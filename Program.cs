@@ -30,7 +30,7 @@ namespace HotelManagement
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<HotelSeeder>();
-                seeder.Seed();
+                seeder.SeedAsync().Wait();
             }
         }
 

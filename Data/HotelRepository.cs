@@ -46,6 +46,13 @@ namespace HotelManagement.Data
                 .ToList();
         }
 
+        public Room GetRoomById(int id)
+        {
+            return _context.Rooms
+                .Where(r => r.Id == id)
+                .FirstOrDefault();
+        }
+
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;
