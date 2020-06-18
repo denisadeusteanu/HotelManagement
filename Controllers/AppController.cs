@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Data;
 using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,6 +24,7 @@ namespace HotelManagement.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet("MainPage")]
         public IActionResult MainPage()
         {

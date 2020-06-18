@@ -13,7 +13,10 @@ namespace HotelManagement.Data
     {
         public HotelMappingProfile()
         {
-            CreateMap<Reservation, ReservationManagementViewModel>();
+            CreateMap<Reservation, ReservationManagementViewModel>()
+                .ReverseMap();
+            CreateMap<Room, RoomManagementViewModel>()
+                .ReverseMap();
         }
     }
 }

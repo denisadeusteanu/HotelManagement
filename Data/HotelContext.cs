@@ -1,9 +1,10 @@
 ﻿using HotelManagement.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagement.Data
 {
-    public class HotelContext :DbContext
+    public class HotelContext :IdentityDbContext<User>
     {
         public HotelContext(DbContextOptions<HotelContext> options):base(options)
         {
@@ -14,9 +15,5 @@ namespace HotelManagement.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

@@ -3,6 +3,8 @@ using HotelManagement.Data;
 using HotelManagement.Data.Entities;
 using HotelManagement.Enums;
 using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace HotelManagement.Controllers
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ReservationsController :Controller
     {
         private readonly IHotelRepository _repository;
