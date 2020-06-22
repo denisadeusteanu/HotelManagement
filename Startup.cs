@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using HotelManagement.Data;
 using HotelManagement.Data.Entities;
+using HotelManagement.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,8 +25,7 @@ namespace HotelManagement
     public class Startup
     {
         private readonly IConfiguration _config;
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
+        
         public Startup(IConfiguration config)
         {
             _config = config;
@@ -64,6 +64,8 @@ namespace HotelManagement
             });
 
             services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IReservationService, IReservationService>();
+
             services.AddTransient<HotelSeeder>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMvc()

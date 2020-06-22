@@ -1,23 +1,32 @@
-﻿@using NonFactors.Mvc.Grid;
+﻿
+@using NonFactors.Mvc.Grid;
 @model IQueryable<HotelManagement.Data.Entities.Room>
-    @{
-    ViewBag.Title = "Room Management";
+@{
+    ViewBag.Title = "Prelucrare Camere";
 
-    }
+}
 
-
-
-    @(Html
+<script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<link href="~/css/style.css" rel="stylesheet" />
+<div class="customSpace">
+    <a asp-controller="Rooms" asp-action="CreateRoom"><button type="button" class="btn btn-primary">Adaugare camera</button></a>
+</div>
+<p></p>
+<div class="customSpace">
+@(Html
     .Grid(Model)
     .Build(columns =>
     {
-    columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false);
-    columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>").RenderedAs(model => @Html.ActionLink("Delete", "Delete", new { id = model.Id }, new { })).Encoded(false);
-    columns.Add(model => model.RoomNumber).Titled("RoomNumber");
-    columns.Add(model => model.PersonCapacity).Titled("PersonCapacity");
-    columns.Add(model => model.Description).Titled("Description");
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false).RenderedAs(model => @Html.ActionLink("Editare", "EditRoom", "Rooms", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>").RenderedAs(model => @Html.ActionLink("Stergere", "Delete", "Rooms", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => model.RoomNumber).Titled("Nr camera");
+        columns.Add(model => model.PersonCapacity).Titled("Nr Persoane");
+        columns.Add(model => model.IsUsable).Titled("Folosibila");
+        columns.Add(model => model.IsOccupied).Titled("Ocupata");
+        columns.Add(model => model.Description).Titled("Descriere");
     })
-    .Empty("No data found")
+    .Empty("Nu au fost gasite date")
     .Filterable()
     .Sortable()
     .Pageable()
@@ -26,21 +35,40 @@
     //    pager.RowsPerPage = 3;
     //})
     )
-
-    <script>
-    function removeDummy() {
-        var elem = document.getElementById('dummy');
-        elem.parentNode.removeChild(elem);
-        return false;
-    }
-    document.addEventListener('rowclick', function (e) {
-        //console.log('data: ', e.detail.data);
-        //console.log('grid: ', e.detail.grid);
-        //console.log('original event: ', e.detail.originalEvent);
+</div>
+<script>
+    document.addEventListener('Edit', function (e) {
+        $(document).ready(function () {
+            $("#dialog").dialog({
+                title: 'Enter Clock No',
+                modal: true,
+                show: 'slide',
+                hide: 'slide'
+            });
+        });
     });
-    </script>
+    $(document).ready(function () {
+        $("#dialog").dialog({
+            bgiframe: true, autoOpen: false, height: 100, modal: true
+        });
+    });
+    function showModal(id) {
+        $.get("/api/Rooms/" + id, function (data) {
+            $("#dialog").html(data);
+        });
+        $('#dialog').dialog('open'); return false;
+    }
 
-    @*<h2>Camere</h2>
+    $(function () {
+        $(".popupLink").click(function (e) {
+            window.confirm("sometext");
+        });
+    });
+
+
+</script>
+
+@*<h2>Camere</h2>
     <p>Numar camere: @Model.Count()</p>
     @foreach (var r in Model)
     {

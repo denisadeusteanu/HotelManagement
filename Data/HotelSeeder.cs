@@ -45,6 +45,7 @@ namespace HotelManagement.Data
                     throw new InvalidOperationException("Could not create new user in seeder.");
                 }
             }
+
             if (!_context.Rooms.Any() && !_context.Hotels.Any())
             {
 
@@ -71,6 +72,7 @@ namespace HotelManagement.Data
                 {
                     var reservation = new Reservation()
                     {
+                        RoomId=rooms.FirstOrDefault().Id,
                         CheckinDate = DateTime.UtcNow.AddDays(-4),
                         CheckOutDate = DateTime.UtcNow.AddDays(-1),
                         ReservationState = ReservationState.Reserved,
@@ -78,13 +80,13 @@ namespace HotelManagement.Data
                         NrOfNights = 3
                     };
 
-                    reservation.ReservationEntities = new List<ReservationEntity>()
-                    {
-                        new ReservationEntity()
-                        {
-                            Room = rooms.First(),
-                        }
-                    };
+                    //reservation.ReservationEntities = new List<ReservationEntity>()
+                    //{
+                    //    new ReservationEntity()
+                    //    {
+                    //        Room = rooms.First(),
+                    //    }
+                    //};
 
                     _context.Reservations.Add(reservation);
                 }
