@@ -53,6 +53,13 @@ namespace HotelManagement.Data
                 .FirstOrDefault();
         }
 
+        public void DeleteRoomById(int id)
+        {
+            var  toDel= _context.Rooms
+                .Where(r => r.Id == id)
+                .FirstOrDefault();
+            _context.Rooms.Remove(toDel);
+        }
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;

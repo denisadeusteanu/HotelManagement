@@ -24,6 +24,7 @@ namespace HotelManagement
     public class Startup
     {
         private readonly IConfiguration _config;
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration config)
         {
@@ -38,6 +39,12 @@ namespace HotelManagement
                 cfg.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<HotelContext>();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddAuthentication()
                 .AddCookie()
@@ -78,12 +85,12 @@ namespace HotelManagement
             app.UseStaticFiles();
             app.UseNodeModules();
 
+            app.UseCors("MyPolicy");
             app.UseAuthentication();            
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseEndpoints(cfg=>
             {
                 cfg.MapControllerRoute("Fallback",
