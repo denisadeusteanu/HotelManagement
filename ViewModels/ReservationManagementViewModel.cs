@@ -20,5 +20,6 @@ namespace HotelManagement.ViewModels
         [Required]
         public Guest Guest { get; set; }
         public int NrOfNights { get; set; }
+        public int RoomId { get; set; }
     }
 }

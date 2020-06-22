@@ -67,31 +67,24 @@ namespace HotelManagement.Data
                        NrOfRooms = 6
                    });
                 _context.Rooms.AddRange(rooms);
+                _context.SaveChanges();
 
                 if (!_context.Reservations.Any())
                 {
                     var reservation = new Reservation()
                     {
-                        RoomId=rooms.FirstOrDefault().Id,
+                        RoomId=rooms.First().Id,
                         CheckinDate = DateTime.UtcNow.AddDays(-4),
                         CheckOutDate = DateTime.UtcNow.AddDays(-1),
                         ReservationState = ReservationState.Reserved,
-                        Guest = guests.FirstOrDefault(),
+                        Guest = guests.First(),
                         NrOfNights = 3
                     };
 
-                    //reservation.ReservationEntities = new List<ReservationEntity>()
-                    //{
-                    //    new ReservationEntity()
-                    //    {
-                    //        Room = rooms.First(),
-                    //    }
-                    //};
-
                     _context.Reservations.Add(reservation);
-                }
 
-                _context.SaveChanges();
+                    _context.SaveChanges();
+                }
             }
         }
     }

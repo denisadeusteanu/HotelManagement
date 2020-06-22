@@ -25,20 +25,18 @@ namespace HotelManagement.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet]
-        //[ProducesResponseType(200)]
-        //[ProducesResponseType(400)]
-        //public ActionResult<IEnumerable<Room>> Get()
-        //{
-        //    try
-        //    {
-        //        return Ok(_repository.GetAllRooms());
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest("Nu s-au putut gasi camerele!");
-        //    }
-        //}
+        [HttpGet]
+        public ActionResult<IEnumerable<Room>> Get()
+        {
+            try
+            {
+                return Ok(_repository.GetAllRooms());
+            }
+            catch (Exception)
+            {
+                return BadRequest("Nu s-au putut gasi camerele!");
+            }
+        }
 
         //[HttpGet]
         //public IActionResult Get(int id)

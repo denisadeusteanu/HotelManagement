@@ -8,6 +8,7 @@ using AutoMapper;
 using HotelManagement.Data;
 using HotelManagement.Data.Entities;
 using HotelManagement.Interfaces;
+using HotelManagement.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -64,7 +65,7 @@ namespace HotelManagement
             });
 
             services.AddScoped<IHotelRepository, HotelRepository>();
-            services.AddScoped<IReservationService, IReservationService>();
+            services.AddScoped<IReservationService, ReservationService>();
 
             services.AddTransient<HotelSeeder>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());

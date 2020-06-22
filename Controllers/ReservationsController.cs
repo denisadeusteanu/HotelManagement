@@ -17,7 +17,7 @@ namespace HotelManagement.Controllers
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ReservationsController :Controller
     {
         private readonly IHotelRepository _repository;
@@ -35,7 +35,9 @@ namespace HotelManagement.Controllers
         public IActionResult Get()
         {
             try { 
-            return Ok(_mapper.Map<IEnumerable<Reservation>, IEnumerable<ReservationManagementViewModel>>(_repository.GetAllReservations()));
+            return Ok(_mapper.Map<IEnumerable<Reservation>,
+                IEnumerable<ReservationManagementViewModel>>
+                (_repository.GetAllReservations()));
             }
             catch(Exception)
             {
@@ -51,14 +53,16 @@ namespace HotelManagement.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.NrOfNights = (model.CheckOutDate - model.CheckinDate).Days;           
+
                     var newReservation = _mapper.Map<ReservationManagementViewModel, Reservation>(model);
 
                     if (newReservation.CheckinDate < DateTime.Now.AddDays(-1) || newReservation.CheckOutDate < DateTime.Now)
                     {
                         return BadRequest("Datele nu pot fi din trecut!");
                     }
-
-                    _repository.AddEntity(model);
+                            
+                     _repository.AddEntity(newReservation);
 
                     if (_repository.SaveAll())
                     {
@@ -70,7 +74,7 @@ namespace HotelManagement.Controllers
                     return BadRequest(ModelState);
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 return BadRequest("Rezervarea nu a putut fi salvata.");
             }

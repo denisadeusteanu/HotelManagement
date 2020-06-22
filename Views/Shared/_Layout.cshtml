@@ -5,9 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href='~/node_modules/@@fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='~/node_modules/@@fullcalendar/timeline/main.css' rel='stylesheet' />
+    <link href="~/node_modules/@@fullcalendar/resource-timeline/main.css" rel="stylesheet" />
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/mvc-grid/mvc-grid.css" rel="stylesheet">
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script>
 </head>
 <body>
     <header class="container">
@@ -47,7 +52,6 @@
     </footer>
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/index.js"></script>
     <script src="~/js/mvc-grid/mvc-grid.js"></script>
     <script>
         document.querySelectorAll(".mvc-grid").forEach(element => new MvcGrid(element));
