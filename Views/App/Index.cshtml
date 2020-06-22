@@ -1,18 +1,19 @@
 ﻿
 @using NonFactors.Mvc.Grid;
-@model IQueryable<HotelManagement.Data.Entities.Room>
+
 @{
-    ViewBag.Title = "Room Management";
+    ViewBag.Title = "not using this";
 
 }
 
+<script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-
-@(Html
+@*@(Html
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false).RenderedAs(model => @Html.ActionLink("Edit", "RoomPopUp", "Rooms", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false).RenderedAs(model => @Html.ActionLink("Edit", "RoomPopUp", "Rooms", new { id = model.Id }, new { @class = "popupLink" })).Encoded(false);
         columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>").RenderedAs(model => @Html.ActionLink("Delete", "Delete", "Rooms", new { id = model.Id }, new { })).Encoded(false);
         columns.Add(model => model.RoomNumber).Titled("RoomNumber");
         columns.Add(model => model.PersonCapacity).Titled("PersonCapacity");
@@ -29,7 +30,7 @@
     )
 
 <script>
-    document.addEventListener('rowclick', function (e) {
+    document.addEventListener('Edit', function (e) {
         $(document).ready(function () {
             $("#dialog").dialog({
                 title: 'Enter Clock No',
@@ -39,7 +40,26 @@
             });
         });
     });
-</script>
+    $(document).ready(function () {
+        $("#dialog").dialog({
+            bgiframe: true, autoOpen: false, height: 100, modal: true
+        });
+    });
+    function showModal(id) {
+        $.get("/Home/Edit/" + id, function (data) {
+            $("#dialog").html(data);
+        });
+        $('#dialog').dialog('open'); return false;
+    }
+
+    $(function () {
+        $(".popupLink").click(function (e) {
+            window.confirm("sometext");
+        });
+    });
+
+
+</script>*@
 @*<link href="~/css/style.css" rel="stylesheet" />*@
 @*<div id="theForm">
         <form>

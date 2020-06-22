@@ -22,12 +22,15 @@ namespace HotelManagement.Data
             _context.Add(model);
         }
 
+        public Hotel GetHotel()
+        {
+            return _context.Hotels.FirstOrDefault();
+        }
+
         public IEnumerable<Reservation> GetAllReservations()
         {
             return _context.Reservations
                 .Include(r => r.Guest)
-                .Include(r => r.ReservationEntities)
-                .ThenInclude(re=>re.Room)
                 .OrderBy(r => r.CheckinDate)
                 .ToList();
         }
@@ -52,7 +55,11 @@ namespace HotelManagement.Data
                 .Where(r => r.Id == id)
                 .FirstOrDefault();
         }
-
+        public void ModifyRoomState(Room room)
+        {
+            _context.Entry<Room>(room).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
         public void DeleteRoomById(int id)
         {
             var  toDel= _context.Rooms

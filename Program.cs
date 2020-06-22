@@ -40,7 +40,8 @@ namespace HotelManagement
                    .UseStartup<Startup>()
                    .Build();
 
-        private static void SetupConfiguration(WebHostBuilderContext ctx, IConfigurationBuilder builder)
+        private static void SetupConfiguration(WebHostBuilderContext ctx, 
+            IConfigurationBuilder builder)
         {
             //Removing the default configuration options
             builder.Sources.Clear();

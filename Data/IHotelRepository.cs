@@ -5,6 +5,7 @@ namespace HotelManagement.Data
 {
     public interface IHotelRepository
     {
+        Hotel GetHotel();
         IEnumerable<Room> GetAllRooms();
         IEnumerable<Room> GetAllRoomsByPersonCapacity();
         Room GetRoomById(int id);
@@ -14,5 +15,6 @@ namespace HotelManagement.Data
         bool SaveAll();
         void AddEntity(object model);
         void DeleteRoomById(int id);
+        void ModifyRoomState(Room room);
     }
 }
