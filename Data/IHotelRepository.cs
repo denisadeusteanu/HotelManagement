@@ -13,6 +13,6 @@ namespace HotelManagement.Data
 
         bool SaveAll();
         void AddEntity(object model);
-       
+        void DeleteRoomById(int id);
     }
 }

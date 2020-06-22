@@ -2,6 +2,7 @@
 using HotelManagement.Data;
 using HotelManagement.Data.Entities;
 using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace HotelManagement.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    [Produces("application/json")]
     public class RoomsController : Controller
     {
         private readonly IHotelRepository _repository;
@@ -25,7 +25,7 @@ namespace HotelManagement.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public ActionResult<IEnumerable<Room>> Get()
@@ -39,7 +39,6 @@ namespace HotelManagement.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
         public IActionResult Get(int id)
         {
             try
@@ -53,6 +52,25 @@ namespace HotelManagement.Controllers
             {
                 return BadRequest($"Failed to get room {id}");
             }
+        }
+
+        [Route("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _repository.DeleteRoomById(id);
+                if (_repository.SaveAll())
+                {
+                    return RedirectToAction("Index", "App");
+                }
+
+            }
+            catch (Exception)
+            {
+                return BadRequest($"Failed to delete room {id}");
+            }
+            return BadRequest($"Failed to delete room {id}");
         }
 
         [HttpPost]
@@ -82,6 +100,12 @@ namespace HotelManagement.Controllers
             }
 
             return BadRequest("Camera nu a putut fi salvata.");
+        }
+
+        [Route("id")]
+        public IActionResult RoomPopUp(int id)
+        {
+            return View();
         }
     }
 }

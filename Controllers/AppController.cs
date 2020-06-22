@@ -21,7 +21,8 @@ namespace HotelManagement.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var results = _repository.GetAllRooms().AsQueryable();
+            return View(results);
         }
 
         [Authorize]
@@ -34,7 +35,7 @@ namespace HotelManagement.Controllers
         [HttpGet("RoomManagement")]
         public IActionResult RoomManagement()
         {
-            var results = _repository.GetAllRooms();
+            var results = _repository.GetAllRooms().AsQueryable();
             return View(results);
         }
         [HttpPost("RoomManagement")]

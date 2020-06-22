@@ -1,47 +1,80 @@
-﻿@model IEnumerable<HotelManagement.Data.Entities.Room>
-@{
+﻿@using NonFactors.Mvc.Grid;
+@model IQueryable<HotelManagement.Data.Entities.Room>
+    @{
     ViewBag.Title = "Room Management";
 
-}
-    <h2>Camere</h2>
-<p>Numar camere: @Model.Count()</p>
-@foreach (var r in Model)
-{
-<div class="col-md-4 offset-md-4">
-    <ul>
-        <li>Numarul camerei: @r.RoomNumber</li>
-        <li>Are capacitatea de @r.PersonCapacity persoane</li>
-        <li>@r.Description</li>
-    </ul>
-</div>
-    
-}
+    }
 
 
 
-    @*<button class="btn btn-primary">Add Room</button>
-        <div class="col-md-4 offset-md-4" >
-            <form method="post">
-                <div asp-validation-summary="ModelOnly"></div>
-                <div class="form-group">
-                    <label asp-for="PersonCapacity">Person Capacity:</label>
-                    <input type="number" asp-for="PersonCapacity" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="RoomNumber">Room Number:</label>
-                    <input type="number" asp-for="RoomNumber" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description">Description:</label>
-                    <textarea rows="5" asp-for="Description" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Add" class="btn btn-primary btn-sm"/>
-                </div>
-            </form>
-        </div>
-        <div>
-            <p>Rooms(Please select room)</p>
-        </div>
-        <button>Edit</button>
-        <button>Delete</button>*@
+    @(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+    columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false);
+    columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>").RenderedAs(model => @Html.ActionLink("Delete", "Delete", new { id = model.Id }, new { })).Encoded(false);
+    columns.Add(model => model.RoomNumber).Titled("RoomNumber");
+    columns.Add(model => model.PersonCapacity).Titled("PersonCapacity");
+    columns.Add(model => model.Description).Titled("Description");
+    })
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+    //.Pageable(pager =>
+    //{
+    //    pager.RowsPerPage = 3;
+    //})
+    )
+
+    <script>
+    function removeDummy() {
+        var elem = document.getElementById('dummy');
+        elem.parentNode.removeChild(elem);
+        return false;
+    }
+    document.addEventListener('rowclick', function (e) {
+        //console.log('data: ', e.detail.data);
+        //console.log('grid: ', e.detail.grid);
+        //console.log('original event: ', e.detail.originalEvent);
+    });
+    </script>
+
+    @*<h2>Camere</h2>
+    <p>Numar camere: @Model.Count()</p>
+    @foreach (var r in Model)
+    {
+    <div class="col-md-4 offset-md-4">
+        <ul>
+            <li>Numarul camerei: @r.RoomNumber</li>
+            <li>Are capacitatea de @r.PersonCapacity persoane</li>
+            <li>@r.Description</li>
+        </ul>
+    </div>
+    }
+    <button class="btn btn-primary">Add Room</button>
+    <div class="col-md-4 offset-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="PersonCapacity">Person Capacity:</label>
+                <input type="number" asp-for="PersonCapacity" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomNumber">Room Number:</label>
+                <input type="number" asp-for="RoomNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description:</label>
+                <textarea rows="5" asp-for="Description" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary btn-sm" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <p>Rooms(Please select room)</p>
+    </div>
+    <button>Edit</button>
+    <button>Delete</button>*@

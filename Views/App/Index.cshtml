@@ -1,8 +1,45 @@
-﻿@model LoginViewModel
+﻿
+@using NonFactors.Mvc.Grid;
+@model IQueryable<HotelManagement.Data.Entities.Room>
 @{
-    ViewBag.Title = "Login Page";
+    ViewBag.Title = "Room Management";
 
 }
+
+
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false).RenderedAs(model => @Html.ActionLink("Edit", "RoomPopUp", "Rooms", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>").RenderedAs(model => @Html.ActionLink("Delete", "Delete", "Rooms", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => model.RoomNumber).Titled("RoomNumber");
+        columns.Add(model => model.PersonCapacity).Titled("PersonCapacity");
+        columns.Add(model => model.Description).Titled("Description");
+    })
+    .Empty("No data found")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+    //.Pageable(pager =>
+    //{
+    //    pager.RowsPerPage = 3;
+    //})
+    )
+
+<script>
+    document.addEventListener('rowclick', function (e) {
+        $(document).ready(function () {
+            $("#dialog").dialog({
+                title: 'Enter Clock No',
+                modal: true,
+                show: 'slide',
+                hide: 'slide'
+            });
+        });
+    });
+</script>
 @*<link href="~/css/style.css" rel="stylesheet" />*@
 @*<div id="theForm">
         <form>
@@ -27,25 +64,25 @@
         </form>
     </div>*@
 
-<div class="col-md-6 offset-md-3">
-    <div class="card card-body bg-light">
-        <form class="popup-form">
-            <div>
-                <label asp-for="Username">Username</label>
-                <input asp-for="Username" />
-            </div>
-            <div>
-                <label asp-for="Password">Password</label>
-                <input type="password" asp-for="Password" />
-            </div>
-            <div>
-                <input type="checkbox" />
-                <label>Remember Me?</label>
-            </div>
-            <div>
-                <input type="submit" value="Login" />
-            </div>
-        </form>
-    </div>
-</div>
+@*<div class="col-md-6 offset-md-3">
+        <div class="card card-body bg-light">
+            <form class="popup-form">
+                <div>
+                    <label asp-for="Username">Username</label>
+                    <input asp-for="Username" />
+                </div>
+                <div>
+                    <label asp-for="Password">Password</label>
+                    <input type="password" asp-for="Password" />
+                </div>
+                <div>
+                    <input type="checkbox" />
+                    <label>Remember Me?</label>
+                </div>
+                <div>
+                    <input type="submit" value="Login" />
+                </div>
+            </form>
+        </div>
+    </div>*@
 
