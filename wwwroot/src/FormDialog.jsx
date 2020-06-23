@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
+import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,12 +26,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormDialog(props) {
   const [open, setOpen] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [checkinDate, setCheckinDate] = useState(props.startDate);
-  const [checkoutDate, setCheckoutDate] = useState(props.endDate);
+  const [firstName, setFirstName] = useState(props.guest?.firstName ? props.guest.firstName : "");
+  const [lastName, setLastName] = useState(props.guest?.lastName ?? "");
+  const [phoneNumber, setPhoneNumber] = useState(props.guest?.phoneNumber ?? "");
+  const [email, setEmail] = useState(props.guest?.email ?? "");
+  const [checkinDate, setCheckinDate] = useState(props.checkinDate ?
+    moment(props.checkinDate).format("YYYY-MM-D") : props.startDate);
+  const [checkoutDate, setCheckoutDate] = useState(props.checkOutDate ?
+    moment(props.checkOutDate).format("YYYY-MM-D") : props.endDate);
   const classes = useStyles();
 
   useEffect(() => {
@@ -48,7 +51,9 @@ export default function FormDialog(props) {
 
   const handleSubmit = () => {
     const reservation = {
+      id: props.id,
       guest: {
+        id: props.guest?.id,
         firstName,
         lastName,
         phoneNumber,
@@ -58,20 +63,43 @@ export default function FormDialog(props) {
       checkoutDate,
       roomId: props.roomId
     }
-    axios.post('api/reservations', reservation)
+
+    if (props.mode === 'edit') {
+      axios.put('api/reservations', reservation)
+        .then(response => {
+          console.log(response);
+          handleClose();
+          location.reload();
+        }, error => {
+          console.log(error);
+        });
+    }
+    else {
+      axios.post('api/reservations', reservation)
+        .then(response => {
+          console.log(response);
+          handleClose();
+          location.reload();
+        }, error => {
+          console.log(error);
+        });
+    }
+  }
+
+  const handleDelete = () => {
+    axios.delete(`api/reservations/${props.id}`)
       .then(response => {
-        console.log(response);
         handleClose();
         location.reload();
       }, error => {
-        console.log(error);
+          console.log(error);
       });
   }
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Adauga rezervare</DialogTitle>
+        <DialogTitle id="form-dialog-title">{props.mode === 'edit' ? 'Sterge rezervarea' : 'Adauga rezervarea'  }</DialogTitle>
         <DialogContent>
           <div>
             <TextField
@@ -145,6 +173,10 @@ export default function FormDialog(props) {
           </div>
         </DialogContent>
         <DialogActions>
+          {props.mode === 'edit' ?
+          <Button onClick={handleDelete} color="primary">
+            Sterge
+          </Button> : <div></div>}
           <Button onClick={handleClose} color="primary">
             Renunta
           </Button>

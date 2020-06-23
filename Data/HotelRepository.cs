@@ -60,9 +60,17 @@ namespace HotelManagement.Data
             _context.Entry<Room>(room).State = EntityState.Modified;
             _context.SaveChanges();
         }
+
+        public void UpdateReservation(Reservation model)
+        {
+            _context.Entry<Reservation>(model).State = EntityState.Modified;
+            _context.Entry<Guest>(model.Guest).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
         public void DeleteRoomById(int id)
         {
-            var  toDel= _context.Rooms
+            var toDel = _context.Rooms
                 .Where(r => r.Id == id)
                 .FirstOrDefault();
             _context.Rooms.Remove(toDel);
@@ -72,5 +80,21 @@ namespace HotelManagement.Data
             return _context.SaveChanges() > 0;
         }
 
+        public Reservation GetReservationById(int id)
+        {
+            return _context.Reservations
+                .Include(r => r.Guest)
+                .Where(r => r.Id == id)
+                .FirstOrDefault();
+        }
+
+        public void DeleteReservationById(int id)
+        {
+            var reservation = _context.Reservations
+                .Where(r => r.Id == id)
+                .FirstOrDefault();
+
+            _context.Reservations.Remove(reservation);
+        }
     }
 }

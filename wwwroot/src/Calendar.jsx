@@ -13,6 +13,7 @@ export default class Calendar extends Component {
   state = {
     rooms: [],
     reservations: [],
+    reservation: null,
     open: true
   }
 
@@ -44,12 +45,14 @@ export default class Calendar extends Component {
       })
   }
 
-  handleDateClick = (info) => {
-    alert('clicked ' + info.dateStr);
-  }
-
-  handleOpen = () => {
-
+  handleEventClick = (info) => {
+    axios.get(`/api/reservations/${info.event.id}`)
+      .then(response => {
+        console.log(response);
+        const reservation = response.data;
+        reservation.mode = 'edit';
+        render(<FormDialog {...reservation} />, document.getElementById("modal"));
+      });
   }
 
   handleDateSelect = (selectInfo) => {
@@ -104,7 +107,7 @@ export default class Calendar extends Component {
           }]}
           resources={rooms}
           events={reservations}
-          eventClick={this.handleDateClick}
+          eventClick={this.handleEventClick}
           select={this.handleDateSelect}
           eventRender={this.eventRender}
         />

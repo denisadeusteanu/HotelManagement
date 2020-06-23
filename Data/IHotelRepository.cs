@@ -11,10 +11,13 @@ namespace HotelManagement.Data
         Room GetRoomById(int id);
 
         IEnumerable<Reservation> GetAllReservations();
+        Reservation GetReservationById(int id);
 
         bool SaveAll();
         void AddEntity(object model);
         void DeleteRoomById(int id);
         void ModifyRoomState(Room room);
+        void UpdateReservation(Reservation model);
+        void DeleteReservationById(int id);
     }
 }

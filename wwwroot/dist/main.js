@@ -92703,14 +92703,18 @@ var Calendar = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       rooms: [],
       reservations: [],
+      reservation: null,
       open: true
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDateClick", function (info) {
-      alert('clicked ' + info.dateStr);
+    _defineProperty(_assertThisInitialized(_this), "handleEventClick", function (info) {
+      axios__WEBPACK_IMPORTED_MODULE_5___default.a.get("/api/reservations/".concat(info.event.id)).then(function (response) {
+        console.log(response);
+        var reservation = response.data;
+        reservation.mode = 'edit';
+        Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormDialog__WEBPACK_IMPORTED_MODULE_7__["default"], reservation), document.getElementById("modal"));
+      });
     });
-
-    _defineProperty(_assertThisInitialized(_this), "handleOpen", function () {});
 
     _defineProperty(_assertThisInitialized(_this), "handleDateSelect", function (selectInfo) {
       var reservation = {
@@ -92799,7 +92803,7 @@ var Calendar = /*#__PURE__*/function (_Component) {
         }],
         resources: rooms,
         events: reservations,
-        eventClick: this.handleDateClick,
+        eventClick: this.handleEventClick,
         select: this.handleDateSelect,
         eventRender: this.eventRender
       }));
@@ -92837,6 +92841,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -92848,6 +92854,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -92875,37 +92882,39 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["ma
   };
 });
 function FormDialog(props) {
+  var _props$guest, _props$guest$lastName, _props$guest2, _props$guest$phoneNum, _props$guest3, _props$guest$email, _props$guest4;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       open = _useState2[0],
       setOpen = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(((_props$guest = props.guest) === null || _props$guest === void 0 ? void 0 : _props$guest.firstName) ? props.guest.firstName : ""),
       _useState4 = _slicedToArray(_useState3, 2),
       firstName = _useState4[0],
       setFirstName = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])((_props$guest$lastName = (_props$guest2 = props.guest) === null || _props$guest2 === void 0 ? void 0 : _props$guest2.lastName) !== null && _props$guest$lastName !== void 0 ? _props$guest$lastName : ""),
       _useState6 = _slicedToArray(_useState5, 2),
       lastName = _useState6[0],
       setLastName = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])((_props$guest$phoneNum = (_props$guest3 = props.guest) === null || _props$guest3 === void 0 ? void 0 : _props$guest3.phoneNumber) !== null && _props$guest$phoneNum !== void 0 ? _props$guest$phoneNum : ""),
       _useState8 = _slicedToArray(_useState7, 2),
       phoneNumber = _useState8[0],
       setPhoneNumber = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])((_props$guest$email = (_props$guest4 = props.guest) === null || _props$guest4 === void 0 ? void 0 : _props$guest4.email) !== null && _props$guest$email !== void 0 ? _props$guest$email : ""),
       _useState10 = _slicedToArray(_useState9, 2),
       email = _useState10[0],
       setEmail = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.startDate),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.checkinDate ? moment__WEBPACK_IMPORTED_MODULE_11___default()(props.checkinDate).format("YYYY-MM-D") : props.startDate),
       _useState12 = _slicedToArray(_useState11, 2),
       checkinDate = _useState12[0],
       setCheckinDate = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.endDate),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.checkOutDate ? moment__WEBPACK_IMPORTED_MODULE_11___default()(props.checkOutDate).format("YYYY-MM-D") : props.endDate),
       _useState14 = _slicedToArray(_useState13, 2),
       checkoutDate = _useState14[0],
       setCheckoutDate = _useState14[1];
@@ -92925,8 +92934,12 @@ function FormDialog(props) {
   };
 
   var handleSubmit = function handleSubmit() {
+    var _props$guest5;
+
     var reservation = {
+      id: props.id,
       guest: {
+        id: (_props$guest5 = props.guest) === null || _props$guest5 === void 0 ? void 0 : _props$guest5.id,
         firstName: firstName,
         lastName: lastName,
         phoneNumber: phoneNumber,
@@ -92936,8 +92949,28 @@ function FormDialog(props) {
       checkoutDate: checkoutDate,
       roomId: props.roomId
     };
-    axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('api/reservations', reservation).then(function (response) {
-      console.log(response);
+
+    if (props.mode === 'edit') {
+      axios__WEBPACK_IMPORTED_MODULE_10___default.a.put('api/reservations', reservation).then(function (response) {
+        console.log(response);
+        handleClose();
+        location.reload();
+      }, function (error) {
+        console.log(error);
+      });
+    } else {
+      axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('api/reservations', reservation).then(function (response) {
+        console.log(response);
+        handleClose();
+        location.reload();
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  };
+
+  var handleDelete = function handleDelete() {
+    axios__WEBPACK_IMPORTED_MODULE_10___default.a["delete"]("api/reservations/".concat(props.id)).then(function (response) {
       handleClose();
       location.reload();
     }, function (error) {
@@ -92951,7 +92984,7 @@ function FormDialog(props) {
     "aria-labelledby": "form-dialog-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
     id: "form-dialog-title"
-  }, "Adauga rezervare"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, props.mode === 'edit' ? 'Sterge rezervarea' : 'Adauga rezervarea'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
     margin: "none",
     id: "firstName",
     label: "Prenume",
@@ -93015,7 +93048,10 @@ function FormDialog(props) {
     InputLabelProps: {
       shrink: true
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__["default"], null, props.mode === 'edit' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onClick: handleDelete,
+    color: "primary"
+  }, "Sterge") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleClose,
     color: "primary"
   }, "Renunta"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
