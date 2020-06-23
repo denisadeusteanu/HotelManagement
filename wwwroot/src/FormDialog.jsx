@@ -99,7 +99,7 @@ export default function FormDialog(props) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{props.mode === 'edit' ? 'Sterge rezervarea' : 'Adauga rezervarea'  }</DialogTitle>
+        <DialogTitle id="form-dialog-title">{props.mode === 'edit' ? 'Editeaza/Sterge rezervarea' : 'Adauga rezervarea'  }</DialogTitle>
         <DialogContent>
           <div>
             <TextField
