@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 import moment from 'moment'
@@ -71,7 +70,7 @@ export default function FormDialog(props) {
           handleClose();
           location.reload();
         }, error => {
-          console.log(error);
+          console.log(error.response);
         });
     }
     else {
@@ -81,7 +80,7 @@ export default function FormDialog(props) {
           handleClose();
           location.reload();
         }, error => {
-          console.log(error);
+          console.log(error.response);
         });
     }
   }
@@ -109,6 +108,8 @@ export default function FormDialog(props) {
               className={classes.textField}
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
+              error={firstName === ""}
+              helperText={firstName === "" ? "Prenumele nu poate fi gol" : ''}
             />
           </div>
           <div>
@@ -150,11 +151,14 @@ export default function FormDialog(props) {
               label="Check-in"
               type="date"
               value={checkinDate}
+              format="dd/MM/yyyy"
               onChange={e => setCheckinDate(e.target.value)}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
+              error={checkinDate === ""}
+              helperText={checkinDate === "" ? "Data de check-in nu poate fi gola" : ''}
             />
           </div>
           <div>
@@ -164,11 +168,14 @@ export default function FormDialog(props) {
               label="Check-out"
               type="date"
               value={checkoutDate}
+              format="DD/MM/yyyy"
               onChange={e => setCheckoutDate(e.target.value)}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
+              error={checkoutDate === ""}
+              helperText={checkinDate === "" ? "Data de check-out nu poate fi gola" : ''}
             />
           </div>
         </DialogContent>

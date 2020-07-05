@@ -13,8 +13,10 @@ namespace HotelManagement.Data
     {
         public HotelMappingProfile()
         {
-            CreateMap<Reservation, ReservationManagementViewModel>()
-                //.ForMember(dest => dest.RoomId, source => source.MapFrom(src => src.ReservationEntities.Select(re => re.Room.Id).First()))
+            CreateMap<Reservation, ReservationManagementViewModel>()              
+                .ReverseMap();
+
+            CreateMap<Guest, GuestViewModel>()
                 .ReverseMap();
 
             CreateMap<Room, RoomManagementViewModel>()

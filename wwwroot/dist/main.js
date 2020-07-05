@@ -18542,81 +18542,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/core/esm/DialogContentText/DialogContentText.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@material-ui/core/esm/DialogContentText/DialogContentText.js ***!
-  \***********************************************************************************/
-/*! exports provided: styles, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _Typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
-
-
-
-
-
-var styles = {
-  /* Styles applied to the root element. */
-  root: {
-    marginBottom: 12
-  }
-};
-var DialogContentText = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["forwardRef"](function DialogContentText(props, ref) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    component: "p",
-    variant: "body1",
-    color: "textSecondary",
-    ref: ref
-  }, props));
-});
- true ? DialogContentText.propTypes = {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The content of the component.
-   */
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node,
-
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css) below for more details.
-   */
-  classes: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object
-} : undefined;
-/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_3__["default"])(styles, {
-  name: 'MuiDialogContentText'
-})(DialogContentText));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/core/esm/DialogContentText/index.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@material-ui/core/esm/DialogContentText/index.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DialogContentText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/DialogContentText.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _DialogContentText__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@material-ui/core/esm/DialogTitle/DialogTitle.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/DialogTitle/DialogTitle.js ***!
@@ -92747,8 +92672,8 @@ var Calendar = /*#__PURE__*/function (_Component) {
           return {
             id: reservation.id,
             title: "".concat(reservation.guest.firstName, " ").concat(reservation.guest.lastName, " ").concat(reservation.guest.phoneNumber),
-            start: moment__WEBPACK_IMPORTED_MODULE_6___default()(reservation.checkinDate).format("YYYY-MM-D"),
-            end: moment__WEBPACK_IMPORTED_MODULE_6___default()(reservation.checkOutDate).format("YYYY-MM-D"),
+            start: moment__WEBPACK_IMPORTED_MODULE_6___default()(reservation.checkinDate).format("YYYY-MM-DD"),
+            end: moment__WEBPACK_IMPORTED_MODULE_6___default()(reservation.checkOutDate).format("YYYY-MM-DD"),
             resourceId: reservation.roomId
           };
         });
@@ -92837,12 +92762,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
 /* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
 /* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
-/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
-/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -92854,7 +92778,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -92909,12 +92832,12 @@ function FormDialog(props) {
       email = _useState10[0],
       setEmail = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.checkinDate ? moment__WEBPACK_IMPORTED_MODULE_11___default()(props.checkinDate).format("YYYY-MM-D") : props.startDate),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.checkinDate ? moment__WEBPACK_IMPORTED_MODULE_10___default()(props.checkinDate).format("YYYY-MM-D") : props.startDate),
       _useState12 = _slicedToArray(_useState11, 2),
       checkinDate = _useState12[0],
       setCheckinDate = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.checkOutDate ? moment__WEBPACK_IMPORTED_MODULE_11___default()(props.checkOutDate).format("YYYY-MM-D") : props.endDate),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.checkOutDate ? moment__WEBPACK_IMPORTED_MODULE_10___default()(props.checkOutDate).format("YYYY-MM-D") : props.endDate),
       _useState14 = _slicedToArray(_useState13, 2),
       checkoutDate = _useState14[0],
       setCheckoutDate = _useState14[1];
@@ -92951,26 +92874,26 @@ function FormDialog(props) {
     };
 
     if (props.mode === 'edit') {
-      axios__WEBPACK_IMPORTED_MODULE_10___default.a.put('api/reservations', reservation).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.put('api/reservations', reservation).then(function (response) {
         console.log(response);
         handleClose();
         location.reload();
       }, function (error) {
-        console.log(error);
+        console.log(error.response);
       });
     } else {
-      axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('api/reservations', reservation).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('api/reservations', reservation).then(function (response) {
         console.log(response);
         handleClose();
         location.reload();
       }, function (error) {
-        console.log(error);
+        console.log(error.response);
       });
     }
   };
 
   var handleDelete = function handleDelete() {
-    axios__WEBPACK_IMPORTED_MODULE_10___default.a["delete"]("api/reservations/".concat(props.id)).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_9___default.a["delete"]("api/reservations/".concat(props.id)).then(function (response) {
       handleClose();
       location.reload();
     }, function (error) {
@@ -92982,7 +92905,7 @@ function FormDialog(props) {
     open: open,
     onClose: handleClose,
     "aria-labelledby": "form-dialog-title"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_8__["default"], {
     id: "form-dialog-title"
   }, props.mode === 'edit' ? 'Editeaza/Sterge rezervarea' : 'Adauga rezervarea'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
     margin: "none",
@@ -92992,7 +92915,9 @@ function FormDialog(props) {
     value: firstName,
     onChange: function onChange(e) {
       return setFirstName(e.target.value);
-    }
+    },
+    error: firstName === "",
+    helperText: firstName === "" ? "Prenumele nu poate fi gol" : ''
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
     margin: "none",
     id: "lastName",
@@ -93028,26 +92953,32 @@ function FormDialog(props) {
     label: "Check-in",
     type: "date",
     value: checkinDate,
+    format: "dd/MM/yyyy",
     onChange: function onChange(e) {
       return setCheckinDate(e.target.value);
     },
     className: classes.textField,
     InputLabelProps: {
       shrink: true
-    }
+    },
+    error: checkinDate === "",
+    helperText: checkinDate === "" ? "Data de check-in nu poate fi gola" : ''
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: "date",
     margin: "none",
     label: "Check-out",
     type: "date",
     value: checkoutDate,
+    format: "DD/MM/yyyy",
     onChange: function onChange(e) {
       return setCheckoutDate(e.target.value);
     },
     className: classes.textField,
     InputLabelProps: {
       shrink: true
-    }
+    },
+    error: checkoutDate === "",
+    helperText: checkinDate === "" ? "Data de check-out nu poate fi gola" : ''
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__["default"], null, props.mode === 'edit' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleDelete,
     color: "primary"

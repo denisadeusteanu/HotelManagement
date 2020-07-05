@@ -89,8 +89,8 @@ namespace HotelManagement
             app.UseNodeModules();
 
             app.UseCors("MyPolicy");
-            app.UseAuthentication();            
-            
+            app.UseAuthentication();
+
             app.UseRouting();
 
             app.UseAuthorization();

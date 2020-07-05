@@ -58,6 +58,7 @@ namespace HotelManagement.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet("Calendar")]
         public IActionResult Calendar()
         {
