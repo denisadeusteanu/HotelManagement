@@ -9,9 +9,9 @@ namespace HotelManagement.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Acest camp nu poate fi gol.")]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Acest camp nu poate fi gol.")]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }

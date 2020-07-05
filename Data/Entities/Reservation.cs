@@ -10,7 +10,7 @@ namespace HotelManagement.Data.Entities
     {
         
         public int Id { get; set; }
-        public int RoomId { get; set; }
+        public Room Room { get; set; }
         public DateTime CheckinDate { get; set; }
         public DateTime CheckOutDate { get; set; }
         public ReservationState ReservationState { get; set; }

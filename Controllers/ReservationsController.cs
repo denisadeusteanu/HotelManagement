@@ -71,7 +71,7 @@ namespace HotelManagement.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody]ReservationManagementViewModel model)
+        public IActionResult Put([FromBody] ReservationManagementViewModel model)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace HotelManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]ReservationManagementViewModel model)
+        public IActionResult Post([FromBody] ReservationManagementViewModel model)
         {
             try
             {
@@ -107,12 +107,9 @@ namespace HotelManagement.Controllers
                         return BadRequest("Datele nu pot fi din trecut!");
                     }
 
-                    _repository.AddEntity(newReservation);
+                    _repository.CreateReservation(newReservation);
 
-                    if (_repository.SaveAll())
-                    {
-                        return Created($"api/reservations/{newReservation.Id}", _mapper.Map<Reservation, ReservationManagementViewModel>(newReservation));
-                    }
+                    return Created($"api/reservations/{newReservation.Id}", _mapper.Map<Reservation, ReservationManagementViewModel>(newReservation));
                 }
                 else
                 {

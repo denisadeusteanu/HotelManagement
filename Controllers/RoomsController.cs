@@ -38,21 +38,21 @@ namespace HotelManagement.Controllers
             }
         }
 
-        //[HttpGet]
-        //public IActionResult Get(int id)
-        //{
-        //    try
-        //    {
-        //        var room = _repository.GetRoomById(id);
+        [Route("id")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var room = _repository.GetRoomById(id);
 
-        //        if (room != null) return Ok(_mapper.Map<Room, RoomManagementViewModel>(room));
-        //        else return NotFound();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest($"Failed to get room {id}");
-        //    }
-        //}
+                if (room != null) return Ok(_mapper.Map<Room, RoomManagementViewModel>(room));
+                else return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to get room {id}");
+            }
+        }
 
         [Route("{id}")]
         public ActionResult Delete(int id)
@@ -154,17 +154,6 @@ namespace HotelManagement.Controllers
             {
                 return BadRequest("Modificarile nu au putut fi salvate.");
             }
-        }
-
-        [Route("id")]
-        public IActionResult EditRoom(int id)
-        {
-            return View(_repository.GetRoomById(id));
-        }
-
-        public IActionResult CreateRoom()
-        {
-            return View();
         }
     }
 }

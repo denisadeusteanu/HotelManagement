@@ -19,6 +19,9 @@ namespace HotelManagement.Data
             CreateMap<Guest, GuestViewModel>()
                 .ReverseMap();
 
+            CreateMap<Room, Room>()
+                .ReverseMap();
+
             CreateMap<Room, RoomManagementViewModel>()
                 .ReverseMap();
         }

@@ -17,6 +17,7 @@ namespace HotelManagement.Data
         void AddEntity(object model);
         void DeleteRoomById(int id);
         void ModifyRoomState(Room room);
+        void CreateReservation(Reservation model);
         void UpdateReservation(Reservation model);
         void DeleteReservationById(int id);
     }

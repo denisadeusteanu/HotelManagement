@@ -92674,7 +92674,7 @@ var Calendar = /*#__PURE__*/function (_Component) {
             title: "".concat(reservation.guest.firstName, " ").concat(reservation.guest.lastName, " ").concat(reservation.guest.phoneNumber),
             start: moment__WEBPACK_IMPORTED_MODULE_6___default()(reservation.checkinDate).format("YYYY-MM-DD"),
             end: moment__WEBPACK_IMPORTED_MODULE_6___default()(reservation.checkOutDate).format("YYYY-MM-DD"),
-            resourceId: reservation.roomId
+            resourceId: reservation.room.id
           };
         });
         console.log(bookings);
@@ -92870,7 +92870,9 @@ function FormDialog(props) {
       },
       checkinDate: checkinDate,
       checkoutDate: checkoutDate,
-      roomId: props.roomId
+      room: {
+        id: props.roomId
+      }
     };
 
     if (props.mode === 'edit') {

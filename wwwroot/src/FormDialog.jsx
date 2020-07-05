@@ -60,7 +60,9 @@ export default function FormDialog(props) {
       },
       checkinDate,
       checkoutDate,
-      roomId: props.roomId
+      room: {
+        id: props.roomId
+      }
     }
 
     if (props.mode === 'edit') {
@@ -91,14 +93,14 @@ export default function FormDialog(props) {
         handleClose();
         location.reload();
       }, error => {
-          console.log(error);
+        console.log(error);
       });
   }
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{props.mode === 'edit' ? 'Editeaza/Sterge rezervarea' : 'Adauga rezervarea'  }</DialogTitle>
+        <DialogTitle id="form-dialog-title">{props.mode === 'edit' ? 'Editeaza/Sterge rezervarea' : 'Adauga rezervarea'}</DialogTitle>
         <DialogContent>
           <div>
             <TextField
@@ -181,8 +183,8 @@ export default function FormDialog(props) {
         </DialogContent>
         <DialogActions>
           {props.mode === 'edit' ?
-          <Button onClick={handleDelete} color="primary">
-            Sterge
+            <Button onClick={handleDelete} color="primary">
+              Sterge
           </Button> : <div></div>}
           <Button onClick={handleClose} color="primary">
             Renunta

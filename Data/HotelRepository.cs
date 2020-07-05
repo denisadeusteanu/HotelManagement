@@ -31,6 +31,7 @@ namespace HotelManagement.Data
         {
             return _context.Reservations
                 .Include(r => r.Guest)
+                .Include(r => r.Room)
                 .OrderBy(r => r.CheckinDate)
                 .ToList();
         }
@@ -95,6 +96,15 @@ namespace HotelManagement.Data
                 .FirstOrDefault();
 
             _context.Reservations.Remove(reservation);
+        }
+
+        public void CreateReservation(Reservation model)
+        {
+            _context.Entry<Reservation>(model).State = EntityState.Added;
+            _context.Entry<Guest>(model.Guest).State = EntityState.Added;
+            _context.Entry<Room>(model.Room).State = EntityState.Unchanged;
+
+            _context.SaveChanges();
         }
     }
 }

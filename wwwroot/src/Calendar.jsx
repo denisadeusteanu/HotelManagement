@@ -35,7 +35,7 @@ export default class Calendar extends Component {
             title: `${reservation.guest.firstName} ${reservation.guest.lastName} ${reservation.guest.phoneNumber}`,
             start: moment(reservation.checkinDate).format("YYYY-MM-DD"),
             end: moment(reservation.checkOutDate).format("YYYY-MM-DD"),
-            resourceId: reservation.roomId
+            resourceId: reservation.room.id
           }
         });
         console.log(bookings);

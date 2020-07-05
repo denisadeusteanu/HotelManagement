@@ -25,8 +25,18 @@ namespace HotelManagement.Controllers
             return View(results);
         }
 
+        public IActionResult EditRoom(int id)
+        {
+            return View(_repository.GetRoomById(id));
+        }
+
+        public IActionResult CreateRoom()
+        {
+            return View();
+        }
+
         [Authorize]
-        [HttpGet("MainPage")]
+       // [HttpGet("MainPage")]
         public IActionResult MainPage()
         {
             return View();

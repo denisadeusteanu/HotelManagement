@@ -10,7 +10,7 @@
 <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <link href="~/css/style.css" rel="stylesheet" />
 <div class="customSpace">
-    <a asp-controller="Rooms" asp-action="CreateRoom"><button type="button" class="btn btn-primary">Adaugare camera</button></a>
+    <a asp-controller="App" asp-action="CreateRoom"><button type="button" class="btn btn-primary">Adaugare camera</button></a>
 </div>
 <p></p>
 <div class="customSpace">
@@ -18,8 +18,10 @@
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false).RenderedAs(model => @Html.ActionLink("Editare", "EditRoom", "Rooms", new { id = model.Id }, new { })).Encoded(false);
-        columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>").RenderedAs(model => @Html.ActionLink("Stergere", "Delete", "Rooms", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Edit</button>").Encoded(false)
+          .RenderedAs(model => @Html.ActionLink("Editare", "EditRoom", "App", new { id = model.Id }, new { })).Encoded(false);
+        columns.Add(model => $"<button data-id=\"{model.Id}\">Delete</button>")
+          .RenderedAs(model => @Html.ActionLink("Stergere", "Delete", "Rooms", new { id = model.Id }, new { })).Encoded(false);
         columns.Add(model => model.RoomNumber).Titled("Nr camera");
         columns.Add(model => model.PersonCapacity).Titled("Nr Persoane");
         columns.Add(model => model.IsUsable).Titled("Folosibila");

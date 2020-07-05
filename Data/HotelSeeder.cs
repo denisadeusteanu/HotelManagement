@@ -73,7 +73,7 @@ namespace HotelManagement.Data
                 {
                     var reservation = new Reservation()
                     {
-                        RoomId=rooms.First().Id,
+                        Room=rooms.First(),
                         CheckinDate = DateTime.UtcNow.AddDays(-4),
                         CheckOutDate = DateTime.UtcNow.AddDays(-1),
                         ReservationState = ReservationState.Reserved,

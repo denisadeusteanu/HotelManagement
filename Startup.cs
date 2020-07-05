@@ -98,7 +98,7 @@ namespace HotelManagement
             {
                 cfg.MapControllerRoute("Fallback",
                     "{controller}/{action}/{id?}",
-                    new { controller = "App", action = "Index" });
+                    new { controller = "App", action = "MainPage" });
             });
         }
     }

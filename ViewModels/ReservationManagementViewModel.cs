@@ -12,6 +12,7 @@ namespace HotelManagement.ViewModels
     public class ReservationManagementViewModel
     {
         public int Id { get; set; }
+        public Room Room { get; set; }
         [Required]
         public DateTime CheckinDate { get; set; }
         [Required]
@@ -20,6 +21,5 @@ namespace HotelManagement.ViewModels
         [Required]
         public GuestViewModel Guest { get; set; }
         public int NrOfNights { get; set; }
-        public int RoomId { get; set; }
     }
 }
