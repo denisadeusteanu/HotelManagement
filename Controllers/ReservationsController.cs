@@ -82,12 +82,12 @@ namespace HotelManagement.Controllers
                 }
                 else
                 {
-                    return BadRequest(ModelState);
+                    return BadRequest("Nu s-a putut actualiza rezervarea");
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest($"Failed to update reservation {model.Id}");
+                return BadRequest($"Nu s-a putut actualiza rezervarea");
             }
         }
 
@@ -113,14 +113,13 @@ namespace HotelManagement.Controllers
                 }
                 else
                 {
-                    return BadRequest(ModelState);
+                    return BadRequest("Rezervarea nu a putut fi salvata.");
                 }
             }
             catch (Exception ex)
             {
                 return BadRequest("Rezervarea nu a putut fi salvata.");
             }
-            return BadRequest("Rezervarea nu a putut fi salvata.");
         }
 
         [Route("{id}")]
@@ -136,11 +135,11 @@ namespace HotelManagement.Controllers
                     return Ok();
                 }
 
-                return BadRequest($"Failed to delete reservation {id}");
+                return BadRequest($"Nu s-a putut sterge rezervarea.");
             }
             catch (Exception ex)
             {
-                return BadRequest($"Failed to delete reservation {id}");
+                return BadRequest($"Nu s-a putut sterge rezervarea.");
             }
         }
     }

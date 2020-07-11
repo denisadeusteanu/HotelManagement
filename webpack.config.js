@@ -2,7 +2,10 @@
 
 module.exports = {
   mode: 'development',
-  entry: './wwwroot/src/index.js',
+  entry: {
+    calendar: './wwwroot/src/index.js',
+    mainPage: './wwwroot/src/mainPage.js'  
+  },
   output: {
     path: path.resolve(__dirname, "./wwwroot/dist"),
     filename: "[name].js"

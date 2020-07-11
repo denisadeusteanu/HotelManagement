@@ -22,7 +22,7 @@ export default class Calendar extends Component {
       .then(response => {
         console.log(response);
         this.setState({
-          rooms: response.data
+          rooms: response.data.filter(room => room.isUsable === 1)
         })
       })
 

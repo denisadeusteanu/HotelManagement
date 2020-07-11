@@ -66,6 +66,7 @@ namespace HotelManagement.Data
         {
             _context.Entry<Reservation>(model).State = EntityState.Modified;
             _context.Entry<Guest>(model.Guest).State = EntityState.Modified;
+            _context.Entry<Room>(model.Room).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
@@ -85,6 +86,7 @@ namespace HotelManagement.Data
         {
             return _context.Reservations
                 .Include(r => r.Guest)
+                .Include(r => r.Room)
                 .Where(r => r.Id == id)
                 .FirstOrDefault();
         }

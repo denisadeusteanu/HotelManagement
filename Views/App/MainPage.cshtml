@@ -1,17 +1,14 @@
 ﻿@model HotelManagement.Data.Entities.Reservation
 @{
-    ViewBag.Title = "Main Page";
-
 }
 
 <div class="row">
-    <div class="col-md-6">
-        <p>11 Rooms available of 30</p>
-        <p>19 Rooms occupied of 30</p>
-        <p>Grid check-in</p>@*put grid!!->with bootstrap*@
-    </div>
-    <div class="col-md-6">
-        <p>Hotel is at ..% capacity</p>@*put in second column!!->with bootstrap*@
-        <p>Grid check-out</p>@*put grid!!->with bootstrap*@
-    </div>
+    <div class="col" id="occupation-chart"></div>
 </div>
+<div class="row">
+    <div class="col" id="main-page1"></div>
+    <div class="col" id="main-page"></div> 
+</div>
+
+
+<script src="~/dist/mainPage.js"></script>

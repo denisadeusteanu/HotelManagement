@@ -1,4 +1,4 @@
-﻿import React, { Component, useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Alert from '@material-ui/lab/Alert'
 import axios from 'axios';
 import moment from 'moment'
 
@@ -30,14 +31,24 @@ export default function FormDialog(props) {
   const [phoneNumber, setPhoneNumber] = useState(props.guest?.phoneNumber ?? "");
   const [email, setEmail] = useState(props.guest?.email ?? "");
   const [checkinDate, setCheckinDate] = useState(props.checkinDate ?
-    moment(props.checkinDate).format("YYYY-MM-D") : props.startDate);
+    moment(props.checkinDate).format("YYYY-MM-DD") : props.startDate);
   const [checkoutDate, setCheckoutDate] = useState(props.checkOutDate ?
-    moment(props.checkOutDate).format("YYYY-MM-D") : props.endDate);
+    moment(props.checkOutDate).format("YYYY-MM-DD") : props.endDate);
+  const [error, setError] = useState("");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+  const didMountRef = useRef(false);
   const classes = useStyles();
 
   useEffect(() => {
-    handleClickOpen();
-  }, []);
+    if(didMountRef.current){
+      setIsSubmitDisabled(firstName === "" || phoneNumber === "" || checkinDate === "" || checkoutDate === "");
+    }
+    else {
+      handleClickOpen();
+      didMountRef.current = true
+    }
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,33 +60,46 @@ export default function FormDialog(props) {
   };
 
   const handleSubmit = () => {
-    const reservation = {
-      id: props.id,
-      guest: {
-        id: props.guest?.id,
-        firstName,
-        lastName,
-        phoneNumber,
-        email
-      },
-      checkinDate,
-      checkoutDate,
-      room: {
-        id: props.roomId
-      }
-    }
-
     if (props.mode === 'edit') {
+      let reservation = {
+        id: props.id,
+        guest: {
+          id: props.guest?.id,
+          firstName,
+          lastName,
+          phoneNumber,
+          email
+        },
+        checkinDate,
+        checkoutDate,
+        room: props.room
+      };
       axios.put('api/reservations', reservation)
         .then(response => {
-          console.log(response);
           handleClose();
           location.reload();
         }, error => {
           console.log(error.response);
+          setError(error.response.data)
         });
     }
     else {
+      let reservation = {
+        id: props.id,
+        guest: {
+          id: props.guest?.id,
+          firstName,
+          lastName,
+          phoneNumber,
+          email
+        },
+        checkinDate,
+        checkoutDate,
+        room: {
+          id: props.roomId
+        }
+      };
+
       axios.post('api/reservations', reservation)
         .then(response => {
           console.log(response);
@@ -83,6 +107,7 @@ export default function FormDialog(props) {
           location.reload();
         }, error => {
           console.log(error.response);
+          setError(error.response.data)
         });
     }
   }
@@ -94,6 +119,7 @@ export default function FormDialog(props) {
         location.reload();
       }, error => {
         console.log(error);
+        setError(error.response.data)
       });
   }
 
@@ -128,11 +154,13 @@ export default function FormDialog(props) {
             <TextField
               margin="none"
               id="phoneNumber"
-              label="Nr de telefon"
+              label="Numar de telefon"
               type="number"
               className={classes.textField}
               value={phoneNumber}
               onChange={e => setPhoneNumber(e.target.value)}
+              error={phoneNumber === ""}
+              helperText={phoneNumber === "" ? "Numarul de telefon nu poate fi gol" : ''}
             />
           </div>
           <div>
@@ -154,7 +182,7 @@ export default function FormDialog(props) {
               type="date"
               value={checkinDate}
               format="dd/MM/yyyy"
-              onChange={e => setCheckinDate(e.target.value)}
+              onChange={e => {setCheckinDate(e.target.value); setError("")}}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
@@ -171,7 +199,7 @@ export default function FormDialog(props) {
               type="date"
               value={checkoutDate}
               format="DD/MM/yyyy"
-              onChange={e => setCheckoutDate(e.target.value)}
+              onChange={e => {setCheckoutDate(e.target.value); setError("")}}
               className={classes.textField}
               InputLabelProps={{
                 shrink: true,
@@ -181,6 +209,7 @@ export default function FormDialog(props) {
             />
           </div>
         </DialogContent>
+        { error ? <Alert severity="error">{error}</Alert> : <div></div>} 
         <DialogActions>
           {props.mode === 'edit' ?
             <Button onClick={handleDelete} color="primary">
@@ -189,7 +218,7 @@ export default function FormDialog(props) {
           <Button onClick={handleClose} color="primary">
             Renunta
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="primary" disabled={isSubmitDisabled}>
             Salveaza
           </Button>
         </DialogActions>
